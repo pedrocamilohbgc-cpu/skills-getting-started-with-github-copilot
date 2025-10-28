@@ -98,6 +98,30 @@ button {
   color: white;
   border: none;
   padding: 10px 15px;
+
+.participants-list {
+  list-style: none;
+}
+
+.participant-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.delete-participant {
+  cursor: pointer;
+  color: #dc3545;
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.delete-participant:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;

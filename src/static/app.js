@@ -20,11 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // Build participants list HTML
+        const escapeHtml = (str) =>
+          String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+        const participantsHTML =
+          details.participants && details.participants.length > 0
+            ? details.participants
+                .map((p) => `<li>${escapeHtml(p)}</li>`)
+                .join("")
+            : `<li class="participants-empty">No participants yet</li>`;
+
         activityCard.innerHTML = `
-          <h4>${name}</h4>
-          <p>${details.description}</p>
-          <p><strong>Schedule:</strong> ${details.schedule}</p>
+          <h4>${escapeHtml(name)}</h4>
+          <p>${escapeHtml(details.description)}</p>
+          <p><strong>Schedule:</strong> ${escapeHtml(details.schedule)}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+
+          <div class="participants">
+            <strong>Participants</strong>
+            <ul class="participants-list">
+              ${participantsHTML}
+            </ul>
+          </div>
         `;
 
         activitiesList.appendChild(activityCard);
